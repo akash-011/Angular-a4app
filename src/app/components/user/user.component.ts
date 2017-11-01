@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { DataService } from '../../services/data.service';
+ 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
@@ -11,7 +12,7 @@ export class UserComponent implements OnInit {
   address: Address
   hobbies: string[]
 
-  constructor() {
+  constructor(private dataService: DataService) {
     console.log('constructor ran...');
    }
 
@@ -25,8 +26,23 @@ export class UserComponent implements OnInit {
     }
     this.hobbies = ['Write code','football','Music']
   }
+  onClick(){
+    this.name = "Wayne Rooney"
+  }  
+  addHobby(hobby){
+    console.log(hobby);
+    this.hobbies.unshift(hobby)
+    return false;
+  }
+  deleteHobby(hobby){
+    for( let i = 0; i <this.hobbies.length; i++){
+      if(this.hobbies[i] == hobby){
+        this.hobbies.splice(i,1);
 
+      }
 
+    }
+  }
 }
 
 interface Address{
